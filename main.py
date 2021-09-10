@@ -21,12 +21,12 @@ def hello_world():
 @app.route("/facturador")
 def facturador():
     id_paciente = request.args.get('id_paciente', type=int)
-    pacientes_ref = db.collection(u'pacientes')
-    pacientes = pacientes_ref.stream()
-    for paciente in pacientes:
-        pacienteData = paciente.to_dict()
-        if(pacienteData.get('id_paciente') == id_paciente):
-            return { "total": random.randint(212,999)  }
+    # pacientes_ref = db.collection(u'pacientes')
+    # pacientes = pacientes_ref.stream()
+    # for paciente in pacientes:
+    #     pacienteData = paciente.to_dict()
+    #     if(pacienteData.get('id_paciente') == id_paciente):
+    #         return { "total": random.randint(212,999)  }
     return { "total2": ((((id_paciente % 9) * 626 + 2) / 9) * 7   )  }
 
 
