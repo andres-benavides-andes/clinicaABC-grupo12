@@ -27,7 +27,7 @@ def facturador():
     #     pacienteData = paciente.to_dict()
     #     if(pacienteData.get('id_paciente') == id_paciente):
     #         return { "total": random.randint(212,999)  }
-    return { "total2": ((((id_paciente % 9) * 626 + 2) / 9) * 7   )  }
+    return { "total": ((((id_paciente % 9) * 626 + 2) / 9) * 7   )  }
 
 
 if __name__ == "__main__":
