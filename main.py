@@ -3,7 +3,7 @@ import firebase_admin
 import random
 from firebase_admin import credentials
 from firebase_admin import firestore
-from flask import Flask, request
+from flask import Flask, request,jsonify
 import json
 
 app = Flask(__name__)
@@ -28,7 +28,7 @@ def facturador():
     #     pacienteData = paciente.to_dict()
     #     if(pacienteData.get('id_paciente') == id_paciente):
     #         return { "total": random.randint(212,999)  }
-    return json.dumps({ "total": ((((id_paciente % 9) * 626 + 2) / 9) * 7   )  })
+    return jsonify({ "total": ((((id_paciente % 9) * 626 + 2) / 9) * 7   )  })
 
 
 if __name__ == "__main__":
