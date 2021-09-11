@@ -4,6 +4,7 @@ import random
 from firebase_admin import credentials
 from firebase_admin import firestore
 from flask import Flask, request
+import json
 
 app = Flask(__name__)
 # Use the application default credentials
@@ -27,7 +28,7 @@ def facturador():
     #     pacienteData = paciente.to_dict()
     #     if(pacienteData.get('id_paciente') == id_paciente):
     #         return { "total": random.randint(212,999)  }
-    return { "total": ((((id_paciente % 9) * 626 + 2) / 9) * 7   )  }
+    return json.dumps({ "total": ((((id_paciente % 9) * 626 + 2) / 9) * 7   )  })
 
 
 if __name__ == "__main__":
