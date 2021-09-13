@@ -3,8 +3,7 @@ import firebase_admin
 import random
 from firebase_admin import credentials
 from firebase_admin import firestore
-from flask import Flask, request,jsonify
-import json
+from flask import Flask, request
 
 app = Flask(__name__)
 # Use the application default credentials
@@ -22,13 +21,13 @@ def hello_world():
 @app.route("/facturador")
 def facturador():
     id_paciente = request.args.get('id_paciente', type=int)
-    # pacientes_ref = db.collection(u'pacientes')
-    # pacientes = pacientes_ref.stream()
-    # for paciente in pacientes:
-    #     pacienteData = paciente.to_dict()
-    #     if(pacienteData.get('id_paciente') == id_paciente):
-    #         return { "total": random.randint(212,999)  }
-    return jsonify({ "total": ((((id_paciente % 9) * 626 + 2) / 9) * 7   )  })
+    pacientes_ref = db.collection(u'pacientes')
+    pacientes = pacientes_ref.stream()
+    for paciente in pacientes:
+        pacienteData = paciente.to_dict()
+        if(pacienteData.get('id_paciente') == id_paciente):
+            return { "total": random.randint(212,999)  }
+    return { "total": ((((id_paciente % 9) * 626 + 2) / 9) * 7   )  }
 
 
 if __name__ == "__main__":
