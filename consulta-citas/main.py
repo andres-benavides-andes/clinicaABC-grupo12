@@ -33,17 +33,24 @@ def consulta():
     jwt = get_jwt_identity()
     id_paciente = jwt.get("user_id")
     perfil = jwt.get("profile")
-
+    citasResponse = []
     if perfil == 0:
         citas_ref = db.collection(u'citas')
         citas = citas_ref.stream()
-        citasResponse = []
+        
         for cita in citas:
             citaData = cita.to_dict()
             if(citaData.get('id_paciente') == id_paciente):
                 citasResponse.append(citaData)
 
         
+        return json.dumps(citasResponse)
+    elif perfil == 1:
+        citas_ref = db.collection(u'citas')
+        citas = citas_ref.stream()
+        for cita in citas:
+            citaData = cita.to_dict()
+            citasResponse.append(citaData)
         return json.dumps(citasResponse)
 
 
