@@ -3,6 +3,7 @@ import firebase_admin
 from flask import Flask, request
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import jwt_required,get_jwt_identity
+from flask_jwt_extended import get_jwt
 from firebase_admin import credentials
 from firebase_admin import firestore
 import json
@@ -28,11 +29,10 @@ def home():
 @app.route("/consulta-citas", methods=["GET"])
 @jwt_required()
 def consulta():
-    id_paciente = request.args.get('id_paciente', type=int)
-
-    jwt = get_jwt_identity()
-    id_paciente = jwt.get("user_id")
-    perfil = jwt.get("profile")
+    # id_paciente = request.args.get('id_paciente', type=int)
+    claims = get_jwt()
+    id_paciente = claims["id_paciente"]
+    perfil = claims["profile"]
     citasResponse = []
     if perfil == 0:
         citas_ref = db.collection(u'citas')
